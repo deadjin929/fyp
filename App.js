@@ -1,23 +1,39 @@
+import React, { useEffect, useState } from "react";
+import { StyleSheet, View, Text } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import Registeration from "./pages/Registeration";
+import HomeScreen from "./pages/Homescreeen";
+import LoadingScreen from "./pages/Loadingscreen";
+import LoginScreen from "./pages/LoginScreen";
+import SignupScreen from "./pages/SignupScreen";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+const Stack = createStackNavigator();
 
-// import pages
-// import signup from "./pages/signup";
+const App = (navigation) => {
+  const [isloggedin, setLogged] = useState(null);
 
-export default function App() {
+  const detectLogin = async () => {
+    const token = await AsyncStorage.getItem("token");
+    if (token) {
+      setLogged(true);
+    } else {
+      setLogged(false);
+    }
+  };
+  useEffect(() => {
+    detectLogin();
+  }, []);
   return (
-    <View style={styles.container}>
-      <Registeration />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator headerMode="none">
+        <Stack.Screen name="loading" component={LoadingScreen} />
+        <Stack.Screen name="home" component={HomeScreen} />
+        <Stack.Screen name="login" component={LoginScreen} />
+        <Stack.Screen name="signup" component={SignupScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+export default App;
