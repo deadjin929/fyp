@@ -5,8 +5,13 @@
     "name": "project",
     "slug": "project",
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ]
+    "assetBundlePatterns": ["**/*"],
+    "android": {
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyChkuHqdo8cBhgvUhlqXRmvwksDocWYYag"
+        }
+      }
+    }
   }
 }

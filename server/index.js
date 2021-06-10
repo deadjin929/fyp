@@ -32,8 +32,8 @@ mongoose.connection.on("connected", () =>
 );
 mongoose.connection.on("error", (err) => console.log(err));
 
-app.get("/", requireToken, (req, res) => {
-  response.send({ email: req.user.email });
+app.get("/", requireToken, (request, response) => {
+  response.send({ email: request.user.email });
 });
 
 app.listen(PORT, () => {

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { View, Text, StyleSheet } from "react-native";
 import { Button, TextInput } from "react-native-paper";
-import { ActivityIndicator, Text, StyleSheet, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import MainTabScreen from "./MainTabScreen/MainTabScreen";
+import Googlelogin from "../googlelogin";
+import GoogleLogin from "react-google-login";
 
 const HomeScreen = (props) => {
   const [email, setEmail] = useState("loading");
@@ -25,19 +26,27 @@ const HomeScreen = (props) => {
 
   const logout = (props) => {
     AsyncStorage.removeItem("token").then(() => {
-      props.navigation.replace("login");
+      props.navigation.navigate("Root", { screen: "login" });
     });
   };
 
   return (
-    <>
-      <View>
-        <Button mode="contained" onPress={() => logout(props)}>
-          logout
-        </Button>
-      </View>
-    </>
+    <View style={styles.container}>
+      <Text>Home Screen</Text>
+      <Button mode="contained" onPress={() => logout(props)} title="logout">
+        logout
+      </Button>
+      <Googlelogin />
+    </View>
   );
 };
 
 export default HomeScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+});

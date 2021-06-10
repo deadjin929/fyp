@@ -4,7 +4,7 @@ const User = mongoose.model("User");
 const { jwtkey } = require("../key");
 
 module.exports = (request, response, next) => {
-  const { authorization } = req.headers;
+  const { authorization } = request.headers;
   //authorization === Bearer sfafsafa
   if (!authorization) {
     return response.status(401).send({ error: "you must be logged in" });
