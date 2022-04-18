@@ -2,13 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Button, TextInput } from "react-native-paper";
 import { ActivityIndicator, Text, StyleSheet, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import MainTabScreen from "./MainTabScreen/MainTabScreen";
 
 const HomeScreen = (props) => {
   const [email, setEmail] = useState("loading");
   const Boiler = async () => {
     const token = await AsyncStorage.getItem("token");
-    fetch("http://10.0.2.2:3000/", {
+    fetch("http://192.168.10.7:3000/", {
       headers: new Headers({
         Authorization: "Bearer " + token,
       }),

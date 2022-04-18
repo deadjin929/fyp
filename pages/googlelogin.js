@@ -26,7 +26,7 @@ export default class googlelogin extends React.Component {
           name: result.user.name,
           photoUrl: result.user.photoUrl,
         });
-        props.navigation.navigate("Home");
+        props.navigation.navigate("home");
         console.log("success");
       } else {
         console.log("cancelled");
@@ -39,7 +39,7 @@ export default class googlelogin extends React.Component {
     return (
       <View>
         {this.state.signedIn ? (
-          () => navigation.navigate("home")
+          () => props.navigation.navigate("Root", { screen: "home" })
         ) : (
           <LoginPage signIn={this.signIn} />
         )}

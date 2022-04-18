@@ -14,8 +14,10 @@ app.use(bodyParser.json());
 
 const requireToken = require("./middleware/requireToken");
 const auhtroute = require("./routes/auhtroute");
+const gpsroute = require("./routes/gpsroute");
 const { response } = require("express");
 app.use(auhtroute);
+app.use(gpsroute);
 
 mongoose
   .connect(mogourl, {

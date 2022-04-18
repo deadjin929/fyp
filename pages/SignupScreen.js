@@ -33,7 +33,7 @@ const SignupScreen = (props) => {
         console.log(data);
         try {
           await AsyncStorage.setItem("token", data.token);
-          props.navigation.navigate("home");
+          props.navigation.navigate("Home");
         } catch (e) {
           console.log("error signup", e);
         }
@@ -79,7 +79,7 @@ const SignupScreen = (props) => {
           theme={{ colors: { primary: "blue" } }}
         />
 
-        <TextInput
+        {/* <TextInput
           label="Username"
           mode="outlined"
           value={Username}
@@ -99,7 +99,7 @@ const SignupScreen = (props) => {
           }}
           style={{ marginLeft: 18, marginRight: 18, marginTop: 18 }}
           theme={{ colors: { primary: "blue" } }}
-        />
+        /> */}
         <Button
           mode="contained"
           style={{ marginLeft: 18, marginRight: 18, marginTop: 18 }}

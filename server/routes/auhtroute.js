@@ -20,7 +20,7 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-router.post("/signin", async (req, res) => {
+router.post("/login", async (req, res) => {
   const { email, password } = req.body;
   console.table([email, password]);
   if (!email || !password) {
@@ -38,5 +38,62 @@ router.post("/signin", async (req, res) => {
     return res.status(500).send({ error: "Internal Sever Error" });
   }
 });
+
+// router.get("/", async (req, res) => {
+//   User
+//     .find({})
+//     .then((data) => {
+//       res.send(data);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// });
+
+// router.post("/send-data", async (req, res) => {
+//   const user = new User({
+//     name: req.body.name,
+//     phone: req.body.phone,
+//     picture: req.body.picture,
+//   });
+//   await user
+//     .save()
+//     .then((data) => {
+//       console.log(data);
+//       res.send(data);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// });
+
+// router.post("/delete", (req, res) => {
+//   user
+//     .findByIdAndRemove(req.body.id)
+//     .then((data) => {
+//       console.log(data);
+//       res.send(data);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// });
+
+// router.post("/update", (req, res) => {
+//   user
+//     .findByIdAndUpdate(req.body.id, {
+//       name: req.body.name,
+//       email: req.body.email,
+//       phone: req.body.phone,
+//       picture: req.body.picture,
+//     })
+//     .then((data) => {
+//       console.log(data);
+//       res.send(data);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// });
 
 module.exports = router;

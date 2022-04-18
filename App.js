@@ -22,12 +22,55 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
-function Feed({ navigation }) {
+function VirtualBorder({ navigation }) {
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Feed Screen</Text>
+      <Text>VirtualBorder Screen</Text>
       <Button title="Open drawer" onPress={() => navigation.openDrawer()} />
       <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
+    </View>
+  );
+}
+
+function UserGuide({ navigation }) {
+  return (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Text>UserGuide Screen</Text>
+      <Button title="Open drawer" onPress={() => navigation.openDrawer()} />
+      <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
+    </View>
+  );
+}
+
+function Logout({ navigation }) {
+  const [email, setEmail] = useState("loading");
+  const Boiler = async () => {
+    const token = await AsyncStorage.getItem("token");
+    fetch("http://192.168.10.6:3000/", {
+      headers: new Headers({
+        Authorization: "Bearer " + token,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setEmail(data.email);
+      });
+  };
+  useEffect(() => {
+    Boiler();
+  }, []);
+
+  const logout = () => {
+    AsyncStorage.removeItem("token").then(() => {
+      navigation.navigate("Root", { screen: "login" });
+    });
+  };
+  return (
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <Button mode="contained" onPress={() => logout()} title="logout">
+        logout
+      </Button>
     </View>
   );
 }
@@ -40,10 +83,6 @@ function CustomDrawerContent(props) {
         label="Close drawer"
         onPress={() => props.navigation.closeDrawer()}
       />
-      <DrawerItem
-        label="Toggle drawer"
-        onPress={() => props.navigation.toggleDrawer()}
-      />
     </DrawerContentScrollView>
   );
 }
@@ -54,6 +93,7 @@ function Root() {
       <Stack.Screen name="loading" component={LoadingScreen} />
       <Stack.Screen name="login" component={LoginScreen} />
       <Stack.Screen name="signup" component={SignupScreen} />
+      <Stack.Screen name="Home" component={MainTabScreen} />
     </Stack.Navigator>
   );
 }
@@ -92,10 +132,12 @@ const App = (navigation) => {
         <Drawer.Navigator
           drawerContent={(props) => <CustomDrawerContent {...props} />}
         >
-          <Drawer.Screen name="home" component={MainTabScreen} />
+          <Drawer.Screen name="Home" component={MainTabScreen} />
+          <Drawer.Screen name="VirtualBorder" component={VirtualBorder} />
           <Drawer.Screen name="todolist" component={Todolist} />
+          <Drawer.Screen name="UserGuide" component={UserGuide} />
+          <Drawer.Screen name="Logout" component={Logout} />
           <Drawer.Screen name="Root" component={Root} />
-          <Drawer.Screen name="Feed" component={Feed} />
         </Drawer.Navigator>
       </NavigationContainer>
     </>

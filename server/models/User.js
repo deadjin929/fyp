@@ -10,6 +10,9 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  name: String,
+  phone: String,
+  picture: String,
 });
 
 userSchema.pre("save", function (next) {

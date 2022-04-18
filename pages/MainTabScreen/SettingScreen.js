@@ -7,46 +7,52 @@ import {
   TouchableOpacity,
   SafeAreaView,
 } from "react-native";
+//import AccountScreen from "./settingscreen/account";
 
-const SettingsScreen = () => {
+const SettingsScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={{ fontSize: 40 }}>Settings</Text>
+      <Text style={{ fontSize: 40, padding: 10 }}>Settings</Text>
+
       <TouchableOpacity>
         <Text
-          style={{ fontSize: 20 }}
-          onPress={() => props.navigation.replace()}
+          style={{ fontSize: 20, padding: 10 }}
+          onPress={() => navigation.push("AccountScreen")}
         >
           Account
         </Text>
       </TouchableOpacity>
+
       <TouchableOpacity>
         <Text
-          style={{ fontSize: 20 }}
-          onPress={() => props.navigation.replace()}
+          style={{ fontSize: 20, padding: 10 }}
+          onPress={() => navigation.push("HomeScreen")}
         >
           Notification
         </Text>
       </TouchableOpacity>
+
       <TouchableOpacity>
         <Text
-          style={{ fontSize: 20 }}
+          style={{ fontSize: 20, padding: 10 }}
           onPress={() => props.navigation.replace()}
         >
           Help
         </Text>
       </TouchableOpacity>
+
       <TouchableOpacity>
         <Text
-          style={{ fontSize: 20 }}
+          style={{ fontSize: 20, padding: 10 }}
           onPress={() => props.navigation.replace()}
         >
           Security
         </Text>
       </TouchableOpacity>
+
       <TouchableOpacity>
         <Text
-          style={{ fontSize: 20 }}
+          style={{ fontSize: 20, padding: 10 }}
           onPress={() => props.navigation.replace()}
         >
           Backup
